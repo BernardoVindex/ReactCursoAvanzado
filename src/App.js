@@ -1,10 +1,14 @@
 import { ListOfCategories } from './components/ListOfCategories'
-import { GobalStyles } from './GlobalStyles'
+import { GobalStyles } from './styles/GlobalStyles'
+import { ListofPhotoCards } from './components/ListOfPhotoCards'
+import { LogoPetgram } from './components/Logo'
 
 const App = () => (
   <div>
     <GobalStyles />
+    <LogoPetgram />
     <ListOfCategories />
+    <ListofPhotoCards />
   </div>
 )
 
