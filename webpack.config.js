@@ -2,7 +2,8 @@ const HtmlWebpackPluin = require('html-webpack-plugin')
 
 module.exports = {
   output: {
-    filename: 'app.bundle.js'
+    filename: 'app.bundle.js',
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json']
@@ -33,5 +34,8 @@ module.exports = {
     new HtmlWebpackPluin({
       template: 'src/index.html'
     })
-  ]
+  ],
+  devServer: {
+    historyApiFallback: true
+  }
 }

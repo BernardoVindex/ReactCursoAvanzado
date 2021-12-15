@@ -10,6 +10,11 @@ const ImgWrapper = styled.div`
   position: relative;
   width: 100%;
 `
+
+const Article = styled.article`
+  min-height: 200px;
+`
+
 const Img = styled.img`
   ${fadeIn({ time: '2s' })}
   box-shadow: 0 10px 14px rgba(0, 0, 0, 0.2);
@@ -29,4 +34,4 @@ const Button = styled.button`
   }
 `
 
-export { ImgWrapper, Img, Button }
+export { ImgWrapper, Article, Img, Button }

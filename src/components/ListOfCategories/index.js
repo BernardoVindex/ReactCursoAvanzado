@@ -2,9 +2,8 @@ import { useState, useEffect, Fragment } from 'react'
 import { Category } from '../Category'
 import { List, Item } from './styles'
 
-const ListOfCategories = () => {
+function useCategoriesData () {
   const [categories, setCategories] = useState([])
-  const [showFixed, setShowFixed] = useState(false)
 
   useEffect(function () {
     window.fetch('https://petgramcuroavanzadoreact.vercel.app/categories')
@@ -13,6 +12,13 @@ const ListOfCategories = () => {
         setCategories(response)
       })
   }, [])
+
+  return { categories }
+}
+
+const ListOfCategories = () => {
+  const { categories } = useCategoriesData()
+  const [showFixed, setShowFixed] = useState(false)
 
   useEffect(function () {
     const onScroll = event => {
@@ -23,7 +29,7 @@ const ListOfCategories = () => {
     document.addEventListener('scroll', onScroll)
 
     return () => document.removeEventListener('scroll', onScroll)
-  })
+  }, [showFixed])
 
   const renderList = (fixed) => (
     <List fixed={fixed}>
@@ -31,7 +37,10 @@ const ListOfCategories = () => {
         categories
           .map(category =>
             <Item key={category.id}>
-              <Category {...category} />
+              <Category
+                {...category}
+                path={`/pet/${category.id}`}
+              />
             </Item>
           )
       }
