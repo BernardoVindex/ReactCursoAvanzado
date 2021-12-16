@@ -1,12 +1,12 @@
 import { PhotoCard } from '../components/PhotoCard'
 import { useGetSinglePhoto } from '../hooks/useGetSinglePhoto'
 
-const PhotoCardWithQuery = ({ id }) => {
-  const { loading, data } = useGetSinglePhoto(id)
+const PhotoCardWithQuery = ({ detailId }) => {
+  const { loading, data } = useGetSinglePhoto(detailId)
 
   if (loading) return null
 
-  const { photo = {} } = data
+  const { photo = { } } = data
 
   return <PhotoCard {...photo} />
 }

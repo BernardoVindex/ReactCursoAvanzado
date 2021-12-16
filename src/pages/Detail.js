@@ -1,8 +1,11 @@
+import { useParams } from 'react-router-dom'
 import { PhotoCardWithQuery } from '../continer/PhotoCardWithQuery'
 
-const Detail = ({ detailId }) => {
+const Detail = () => {
+  const { detailId } = useParams()
+
   return (
-    <PhotoCardWithQuery id={detailId} />
+    <PhotoCardWithQuery detailId={detailId} />
   )
 }
 

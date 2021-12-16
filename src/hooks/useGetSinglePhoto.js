@@ -4,12 +4,12 @@ const useGetSinglePhoto = (id) => {
   const getSinglePhoto = gql`
     query getSinglePhoto($id:ID!) {
       photo(id:$id) {
-      id
-      categoryId
-      src
-      likes
-      userId
-      liked
+        id
+        categoryId
+        src
+        likes
+        userId
+        liked
     }
   }
   `
