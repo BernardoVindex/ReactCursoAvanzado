@@ -1,15 +1,18 @@
 import { GobalStyles } from './styles/GlobalStyles'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { LogoPetgram } from './components/Logo'
 import { Detail } from './pages/Detail'
 import { Home } from './pages/Home'
 import { NavBar } from './components/NavBar'
 import { Favs } from './pages/Favs'
 import { User } from './pages/User'
+import { AppContext } from './AppContext'
+import { useContext } from 'react'
 import { NotRegisteredUser } from './pages/NotRegisteredUser'
 
 const App = () => {
-  console.log(<Detail />)
+  const { value: { isAuth } } = useContext(AppContext)
+  console.log(isAuth)
   return (
     <div>
       <GobalStyles />
@@ -19,8 +22,9 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/pet/:id' element={<Home />} />
           <Route path='/detail/:detailId' element={<Detail />} />
-          <Route path='/favs' render={() => isLogged ? <Favs /> : <Redirect to='/register' />} />
-          <Route path='/user' render={() => isLogged ? <User /> : <Redirect to='/register' />} />
+          <Route path='/favs' render={() => isAuth ? <Favs /> : <Link to='/register' />} />
+          <Route path='/user' render={() => isAuth ? <User /> : <Link to='/register' />} />
+          <Route path='/register' element={<NotRegisteredUser />} />
           <Route path='*' element={<h1>Error Not Found</h1>} />
         </Routes>
         <NavBar />
