@@ -1,26 +1,23 @@
 import { Link } from 'react-router-dom'
+import { PropTypes } from 'prop-types'
 import { ImgWrapper, Article, Img } from './styles'
-import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useNearScreen } from '../../hooks/useNearScreen'
 import { FavButton } from '../FavButton'
 import { useMuationToogleLike } from '../../hooks/useMuationToogleLike'
 
 const DEFAUT_IMAGE = 'https://res.cloudinary.com/midudev/image/upload/w_300/q_80/v1560262103/dogs.png'
 
-const PhotoCard = ({ id, likes = 0, src = DEFAUT_IMAGE }) => {
+const PhotoCard = ({ id, liked, likes = 0, src = DEFAUT_IMAGE }) => {
   const [show, element] = useNearScreen()
-  const key = `like-${id}`
-  const [liked, setLiked] = useLocalStorage(key, false)
 
   const { mutation } = useMuationToogleLike()
 
   const handleFavClick = () => {
-    !liked && mutation({
+    mutation({
       variables: {
         input: { id }
       }
     })
-    setLiked(!liked)
   }
 
   return (
@@ -48,3 +45,20 @@ const PhotoCard = ({ id, likes = 0, src = DEFAUT_IMAGE }) => {
 }
 
 export { PhotoCard }
+
+PhotoCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  liked: PropTypes.bool.isRequired,
+  src: PropTypes.string.isRequired,
+  likes: function (props, propName, componentName) {
+    const propValue = props[propName]
+
+    if (propValue === undefined) {
+      return new Error(`${propName} value must be defined`)
+    }
+
+    if (propValue < 0) {
+      return new Error(`${propName} value must be greater than 0`)
+    }
+  }
+}

@@ -1,7 +1,13 @@
-const Favs = () => {
+import { FavsWithQuery } from '../continer/GetFavorites'
+import { Layout } from '../components/Layout'
+
+export default () => {
   return (
-    <h1>Favs</h1>
+    <Layout
+      title='Tus favoritos'
+      subtitle='Aquí puedes encontrar tus favoritos'
+    >
+      <FavsWithQuery />
+    </Layout>
   )
 }
-
-export { Favs }

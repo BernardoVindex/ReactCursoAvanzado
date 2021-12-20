@@ -4,7 +4,7 @@ import { UserForm } from '../components/UserForm'
 import { RegisterMutation } from '../continer/RegisterMutation.js'
 import { LoginMutation } from '../continer/LoginMutation.js'
 
-const NotRegisteredUser = () => {
+export default () => {
   const { value: { activateAuth } } = useContext(AppContext)
 
   return (
@@ -59,5 +59,3 @@ const NotRegisteredUser = () => {
     </>
   )
 }
-
-export { NotRegisteredUser }
